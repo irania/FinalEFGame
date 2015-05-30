@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Efgame</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+
+<body>
+<!-- Header -->
+    
+    <section id="container" >
+
+      <% if user_signed_in? %>
+
+
+            <header class="header black-bg">
+             <div class="sidebar-toggle-box">
+
+
+                <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+             </div>
+             <!--logo start-->
+             <!--<a href="index.html" class="logo"><b>مهر سرو</b></a>-->
+             <a href="/" class="logo"><img src="/assets/login/icon.png"  width="160"></a>
+             <!--logo end-->
+                    
+             <div class="top-menu">
+               <ul class="nav pull-right top-menu">
+                 <li>
+                  <%= link_to 'خانه', "../.." , :class=>"logout"%>
+                 </li>
+                 <li>
+                   <a class = "logout" href="../../users/edit"><%= current_user.name%></a>
+                 </li>
+                 <li>
+                  <%= link_to "خروج", destroy_user_session_path, :method => :delete  , :class=>"logout"%> 
+                 </li>
+                
+               </ul>
+             </div>
+          </header>
+          <!--header end-->
+
+  
+
+            <!--sidebar start-->
+            <aside>
+                <div id="sidebar"  class="nav-collapse ">
+                    <!-- sidebar menu start-->
+                    <ul class="sidebar-menu" id="nav-accordion">
+                    
+                       <p class="centered"><a href="profile.html"><img width="60" class="img-circle" src="/assets/pics/Pencil-icon.png"></a></p>      
+                        
+                        <h5 class="centered"><br></h5>
+                        <li class="sub-menu">
+                            
+                                <i class="fa fa-desktop"></i>
+                                <span><a href="../../users/ranking">رتبه بندی افراد</a></span>
+                            </a> 
+                          
+                        </li>
+
+                        <li class="sub-menu">
+                            
+                                <i class="fa fa-desktop"></i>
+                                <span> <a href="../../games">بازی ها</a></span>
+                            </a>
+                            
+                        </li>
+
+                        <li class="sub-menu">
+                            
+                                <i class="fa fa-cogs"></i>
+                                <span><a href="../../profile/edit">تغییر رمز عبور</a></span>
+                            </a>
+                            
+                        </li>
+                        <li class="sub-menu">
+                                <i class="fa fa-book"></i>
+                                <span><a href="../../users/edit">پروفایل</a></span>
+                                </a>
+                                
+                        </li>
+     
+
+                    </ul>
+                    <!-- sidebar menu end-->
+                   
+                </div>
+            </aside>
+            <!--sidebar end-->
+
+
+
+
+
+
+        <section id="main-content">
+              <section class="wrapper">
+
+                    <div class="row">
+                        
+                        
+                        
+            <!-- **********************************************************************************************************************************************************
+            RIGHT SIDEBAR CONTENT
+            *********************************************************************************************************************************************************** -->                  
+                        
+                                                <div class="col-lg-3 ds">
+                          <!--COMPLETED ACTIONS DONUTS CHART-->
+                  <h3>اخبار</h3>
+                                              
+                            <div class="desc">
+                      
+                              <div class="centered">
+                                <img src = "/assets/pics/hzeinab.png" class = "centered" width="240">
+                              </div>
+                            </div>
+                            <!-- Second Action -->
+                        <% t=0 %>
+                            <% News.order(id: :desc).each do |u| %>
+                            <% t=t+1 %>
+                            <% if t<6 %>
+                            <div class="desc">
+                                  <div class="details">
+                                    <p><muted><%= u.title %></muted><br/>
+                                    <a href="#"><%= u.content %></a> <br/>
+                                </p>
+                              </div>
+                            </div>
+                            <% end %>
+                        <% end %>
+                            <!-- Third Action -->
+
+                      
+
+                              
+                            
+                        </div><!-- /col-lg-3 -->
+
+                        <div class="col-lg-9 main-chart">   <!-- fek konam in khat nabayad bashe&&&&&&&&&&&&&&&^^^^^^^^^^^^^-->
+
+                <%= yield %>          
+                        </div><!-- /col-lg-9 END SECTION MIDDLE --><!-- fek konam in khat nabayad 
+                    </div><! --/row -->
+             </section>
+          
+          <!--main content end-->
+
+
+        
+            <!--footer start-->
+            <footer class="site-footer">
+                <div class="text-center">
+                    گروه ۵ آزمایشگاه مهندسی نرم  افزار
+                    <a href="index.html#" class="go-top">
+                        <i class="fa fa-angle-up"></i>
+                    </a>
+                </div>
+            </footer>
+            <!--footer end-->
+
+
+      <!--end of "if user signed in?" -->
+      <% else %>
+            <!%= link_to "Sign up", new_user_registration_path %>
+            <!%= link_to "Sign in", new_user_session_path %>
+            <%= yield %>
+
+
+            <%end %>
+  <div id="join-subscriber">
+ <%= render 'layouts/join_subscriber' %>
+</div>
+</body>
+</html>
+

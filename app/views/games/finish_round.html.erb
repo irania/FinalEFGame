@@ -1,0 +1,53 @@
+<br><br><br>
+
+
+        <!-- One -->
+<section class="wrapper style2 container special-alt">
+  <div class="row 50%">
+      <div class="8u 12u(narrower)">
+
+        <header>
+            <h2>لیست بازی ها</h2>
+        </header>
+        <table class="responstable">
+          <tbody>
+
+          <tr>
+            <th>بازیکن</th>
+            <th>امتیاز</th>
+          </tr>
+          <% @boards.each do |board| %>
+
+              <tr>
+                <td><%= board.player.username%></td>
+                <td><%= board.score%></td>
+              </tr>
+          <% end %>
+
+          </tbody>
+        </table>
+        <br>
+
+
+      </div>
+      <div class="4u 12u(narrower) important(narrower)"> </div>
+  </div>
+</section>
+
+<script src="http://code.jquery.com/jquery-1.9.0.js"></script>
+<script>
+$(document).ready(function(){
+  destroyflag = 0;
+  window.setInterval(function() {
+        if(<%= @game.number_of_rounds%> > 0 )
+          window.location = "/game_boards/<%= @board_id %>/"; 
+        else{
+
+          alert("بازی تمام شده است.");
+          window.location ="/games";
+
+        }
+    }, 5000);
+});
+
+</script>

@@ -1,0 +1,31 @@
+
+
+<br><br>
+<div class="container jumbotron"style="width:40%; height:70%; direction:rtl">
+<%= form_for News.new , :html => {:class => "form-horizontal", :role => "form"} do |f| %>
+
+<div class="">
+  
+  <%= f.label 'عنوان',:style => "margin-right:150px"%>
+
+    <%= f.text_field :title ,:style => "width:70%;margin-right:150px",:class => "form-control"%>
+  
+</div>
+
+<div class="">
+  
+  <%= f.label 'متن' ,:style => "margin-right:150px"%>
+    <%= f.text_area :content, :rows => 10  ,:style => "width:70%;margin-right:150px",:class => "form-control" %>
+  
+</div>
+ <br>
+  <div style="padding-right:150px">
+    <%= content_tag :button, :type => :submit, :class => "btn btn-info btn-medium btn-lg btn-primary btn-purple-color" do %>
+    <i class="icon-ok bigger-110" ></i>
+    <%=t :submit%>
+    <% end %>
+
+    </div>
+<% end %>
+  <br><br><br>
+ </div>

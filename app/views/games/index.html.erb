@@ -1,0 +1,66 @@
+<br><br><br>
+
+
+        <!-- One -->
+<div class="col-md-12">
+<section class="">
+  <div class="row 50%">
+      <div class="8u 12u(narrower)">
+      
+        <div class="content-panel">
+                          <h3><i class="fa fa-angle-right"></i> >> لیست بازی ها</h3><hr><table class="table table-striped table-advance table-hover">
+                            
+                            
+                              <thead>
+                              <tr>
+                                  <th>شماره بازی</th>
+                                  <th>ایجاد کننده</th>
+                                  <th>تعداد بازکنان</th>
+                                  <th>تعداد دورها</th>
+
+                                  <th></th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                              <% @games.each do |game| %>
+ 								<% if !(game.is_private ) || (current_user && game.creater_id == current_user.id )||(current_user && current_user.is_admin) %>
+                                  <tr>
+                                    <td><%=link_to game.id, game  %></td>
+                                    <td><%= game.creater.username %></td>
+                                    <td><%= game.number_of_players %></td>
+                                    <td><%= game.number_of_rounds %></td>
+                                    <td>
+
+                                    <% if GameBoard.where(:player_id => current_user.id).blank? %>
+                                        <%= link_to game_boards_path(:game_id => game, :player_id => current_user), :remote => true, :class=>"btn btn-info  btn-sm",:method => :post do %>پیوستن به بازی<% end %>
+                                    <% elsif !(GameBoard.where(:player_id => current_user.id,:game_id => game.id).blank?) %>
+                                        <%= link_to 'انصراف از بازی', (GameBoard.where(:player_id => current_user.id,:game_id => game.id).first), method: :delete, data: {:controller => "game_boards",  confirm: 'Are you sure?' } , :class =>"btn btn-danger  btn-sm" %>
+                                    <% end %>
+
+                                    </td>
+                                  </tr>
+                              <% end %>
+							  <% end %>
+                              </tbody>
+                          </table>
+      
+                      </div>
+        
+        <br>
+        <footer>
+          <ul class="buttons">
+            <li><%= link_to new_game_path(:is_private => 0 ), :class=>"btn btn-theme02", :style=>"padding:1px 9px;float:right;color:white;margin-left:5px" do %> 
+			<h3>بازی عمومی جدید</h3> <% end %></li>   
+			<li><%= link_to new_game_path(:is_private => 1 ), :class=>"btn btn-theme02", :style=>"padding:1px 9px;float:right;color:white" do %> 
+			<h3>بازی خصوصی جدید</h3> <% end %></li>
+          </ul>
+        </footer>
+
+      </div>
+      <div class="4u 12u(narrower) important(narrower)"> </div>
+  </div>
+</section>
+</div>
+
+
+

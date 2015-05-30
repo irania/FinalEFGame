@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+
+    <header class="special container">
+      <span class="icon fa-tablet"></span>
+      <h1>نمایش اطلاعات بازی</h1>
+        
+    </header>
+<br><br><br>
+<section class="">
+   
+                <div class="alert alert-danger">
+                  <h4>بازی هنوز شروع نشده است.</h4>
+                </div>
+
+	                <div id="players">
+						<%= render 'playerstable' %>
+					</div>
+                
+<br>
+                <footer>
+                  <ul class="btn btn-theme04 btn-lg">
+                    <li><a href="/games/new" class="button">بازی جدید</a></li>
+                  </ul>
+                </footer>
+
+                </div>
+                  <div class="4u 12u(narrower) important(narrower)">
+
+                
+
+          </section>
+
+<%= subscribe_to "/game_rosters/new" %>

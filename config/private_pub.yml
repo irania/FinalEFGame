@@ -1,0 +1,10 @@
+development:
+  server: "https://frozen-ridge-1733.herokuapp.com/faye"
+  secret_token: "secret"
+test:
+  server: "https://frozen-ridge-1733.herokuapp.com/faye"
+  secret_token: "secret"
+production:
+  server: "http://example.com/faye"
+  secret_token: "f04db76f697d54ace356aaa5cc4a724f175d97aeb042bdfb3b05ab967054529a"
+  signature_expiration: 3600 # one hour

@@ -1,0 +1,16 @@
+<div id="chatbox">
+	<%= form_for [@game, Chat.new], :remote => true do |f| %>
+		<%= f.text_area :text %>
+		<%= f.submit 'ارسال' %>
+	<% end %>
+</div>
+
+<% @game.chats.order(:created_at => :desc).each do |chat| %>
+    <div class="chat">
+      <div class="sender">
+        <%= chat.sender.username %>
+      </div> 
+      <div class="text"><%= chat.text %></div>
+	  ------------------------------
+    </div>
+<% end %>

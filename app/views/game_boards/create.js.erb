@@ -1,0 +1,30 @@
+<% if @errors.any? %> 
+  	alert ('<%=raw @errors.first %>');
+
+<% elsif @game_board.errors.any? %>
+	alert ('<%=raw @game_board.errors.full_messages %>');
+
+<% elsif @game_started %>
+	<% @game_boards.each do |board| %>
+		<% publish_to "/#{board.id}/join" do %>
+			window.location.href = '<%= game_board_path(board.id) %>'; 
+		<% end %>
+	<% end %>
+			window.location.href = '<%= game_board_path(@started_game_board.id) %>'; 
+	
+	
+	
+<% else %>
+	$('#players').html('<%= escape_javascript(render :partial => "games/playerstable") %>');
+	$('#join-subscriber').html('<%= escape_javascript(render :partial => "layouts/join_subscriber") %>');
+	alert('شما با موفقیت به این بازی پیوستید ولی بازی هنوز شروع نشده است.');
+<% end %>
+
+<% publish_to "/game_rosters/new" do %>
+
+ 	 $("#players").html("<%= escape_javascript(render(:partial => 'games/playerstable' , :object => @game) )%>");
+	 $("#new_game_rosters")[0].reset();
+	 $("#players").reset();
+<% end %>
+
+
